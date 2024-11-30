@@ -7,12 +7,14 @@ dotenv.config();
 const app = express();
 
 const cors = require("cors");
-
+// cors middleware
 app.use(cors());
+//bodyParser
 app.use(bodyParser.json());
 
 console.log(__dirname);
 
+app.use(express.static("dist"));
 // Variables for url and api key
 
 app.get("/", function (req, res) {
