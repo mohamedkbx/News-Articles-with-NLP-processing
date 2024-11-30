@@ -4,7 +4,8 @@
   "description": "evaluate news with NLP proccessing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack-dev-server  --config webpack.dev.js"
   },
   "author": "mohamedkbx",
   "license": "ISC",
