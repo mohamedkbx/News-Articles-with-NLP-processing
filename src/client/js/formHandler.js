@@ -1,8 +1,6 @@
 // Replace checkForName with a function that checks the URL
 import { checkForName } from "./nameChecker";
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
 const serverURL = "https://localhost:8000/api";
 
 const form = document.getElementById("urlForm");
