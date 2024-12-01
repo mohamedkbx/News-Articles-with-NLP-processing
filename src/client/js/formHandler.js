@@ -6,7 +6,7 @@ const serverURL = "https://localhost:8000/api";
 const form = document.getElementById("urlForm");
 form.addEventListener("submit", handleSubmit);
 
-export function handleSubmit(event) {
+function handleSubmit(event) {
   event.preventDefault();
 
   // Get the URL from the input field
