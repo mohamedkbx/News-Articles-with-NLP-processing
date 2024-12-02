@@ -1,26 +1,30 @@
-// Replace checkForName with a function that checks the URL
-import { checkForName } from "./nameChecker";
+var path = require("path");
+const express = require("express");
+const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config();
 
-const serverURL = "https://localhost:8000/api";
+const app = express();
 
-const form = document.getElementById("urlForm");
-form.addEventListener("submit", handleSubmit);
+const cors = require("cors");
 
-function handleSubmit(event) {
-  event.preventDefault();
+// cors middleware
+app.use(cors());
+//bodyParser
+app.use(bodyParser.json());
 
-  // Get the URL from the input field
-  const formText = document.getElementById("name").value;
+console.log(__dirname);
 
-  // This is an example code that checks the submitted name. You may remove it from your code
-  checkForName(formText);
+app.use(express.static("dist"));
+// Variables for url and api key
 
-  // Check if the URL is valid
+app.get("/", function (req, res) {
+  res.send("This is the server API page, you may access its services via the client app.");
+});
 
-  // If the URL is valid, send it to the server using the serverURL constant above
-}
+// POST Route
 
-// Function to send data to the server
-
-// Export the handleSubmit function
-export { handleSubmit };
+// Designates what port the app will listen to for incoming requests
+app.listen(8000, function () {
+  console.log("Example app listening on port 8000!");
+});
