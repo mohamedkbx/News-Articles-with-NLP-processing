@@ -1,0 +1,13 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: rgb(0, 89, 205);
+  font-size: 20px;
+  color: white;
+
+  .footer__text {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sentemient Analysis</title>
+  </head>
 
-    <body>
+  <body>
+    <header>
+      <div>
+        <a class="nav__link" href="#">
+          <span>MeaningCloud</span>
+        </a>
+      </div>
+      <div>
+        <ul class="nav">
+          <li>
+            <a class="nav__link" href="#">Home</a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">Test</a>
+          </li>
+        </ul>
+      </div>
+    </header>
 
-        <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
+    <main>
+      <section>
+        <form id="urlForm">
+          <h5>Write a valid URL</h5>
+          <input id="urlInput" type="text" name="url" placeholder="Enter URL" />
+          <div id="errorMsg"></div>
+          <button id="submitButton" type="submit" class="">Submit</button>
+        </form>
+      </section>
 
-        <main>
-            <section>
-                <form id="urlForm">
-                    <input id="name" type="text" name="url" placeholder="Enter URL" required>
-                    <button id="submitButton" type="submit">Submit</button>
-                </form>
-                
-            </section>
+      <section class="results-section">
+        <div class="text__container">
+          <strong class="section__text">Form Results:</strong>
+        </div>
+        <div id="results"></div>
+      </section>
+    </main>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-
-    </body>
+    <footer>
+      <div class="footer__text">
+        <span>© Sentemient Analysis</span>
+      </div>
+    </footer>
+  </body>
 </html>
