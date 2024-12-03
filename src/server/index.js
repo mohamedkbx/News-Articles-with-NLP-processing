@@ -46,6 +46,6 @@ app.post("/getData", async (req, res) => {
 });
 
 // Start the server
-app.listen(6000, () => {
-  console.log("Server is live on port 6000");
+app.listen(8000, () => {
+  console.log("Server is live on port 8000");
 });

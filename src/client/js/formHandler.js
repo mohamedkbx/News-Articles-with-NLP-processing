@@ -7,7 +7,7 @@ const apiEndPoint = "http://localhost:6000/getData";
 const formElement = document.getElementById("urlForm");
 const errorDisplay = document.getElementById("errorMsg");
 const submitBtn = document.getElementById("submitButton");
-const urlElemntInput = document.getElementById("urlElemntInput");
+const urlElemntInput = document.getElementById("urlInput");
 
 formElement.addEventListener("submit", handleFormSubmission);
 
