@@ -70,9 +70,7 @@ async function handleFormSubmission(event) {
         <div class="result-item">
           <strong>Irony:</strong> ${object.irony}
         </div>
-        <div class="result-item">
-          <strong>Score Tag:</strong> ${object.score_tag}
-        </div>
+        
       `;
 
         document.getElementById("results").innerHTML = resultConatainer;
