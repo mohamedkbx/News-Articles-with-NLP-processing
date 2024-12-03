@@ -1,48 +1,46 @@
-import { checkForName } from "./nameChecker";
+import { checkForName } from "./nameChecker"; // If you wish to use a custom validateUrl function
 
-// URL for the server API (localhost for local testing)
-const apiUrl = "https://localhost:8000/api";
-//select elements
-// Get the form element, error message element, submit button, and URL input field
+// If working in Udacity workspace, adjust this to your Server API URL, for example: `https://example.udacity-student-workspaces.com/api`
+// const apiURL = 'https://example.udacity-student-workspaces.com/api'
+const apiURL = "https://localhost:8000/api";
+
 const formElement = document.getElementById("urlForm");
-const errorMessageElement = document.getElementById("errorMessage");
-const submitButtonElement = document.getElementById("submitButton");
-const urlInputElement = document.getElementById("url");
-// event Listeners
-formElement.addEventListener("submit", handleFormSubmit);
+const errorDisplay = document.getElementById("errorMessage");
+const submitBtn = document.getElementById("submitButton");
+const urlInput = document.getElementById("url");
 
-// Form submit handler
-async function handleFormSubmit(event) {
+formElement.addEventListener("submit", handleFormSubmission);
+
+async function handleFormSubmission(event) {
   event.preventDefault();
 
-  // Disable the submit button to prevent multiple clicks
-  setButtonState(false, "Loading...");
+  // Disable the button to prevent multiple submissions
+  toggleButtonState(false, "Processing...");
 
-  // Get the URL value from the input field and remove extra spaces
-  const inputUrl = urlInputElement.value.trim();
+  // Retrieve the URL from the input field
+  const urlValue = urlInput.value.trim(); // Remove extra spaces from the URL
 
-  // If the input URL is empty, show an error
-  if (inputUrl === "") {
-    showError("The URL field cannot be empty!");
-    setButtonState(true, "Submit");
+  // Ensure the URL input is not empty
+  if (urlValue === "") {
+    showErrorMessages("The URL field cannot be left empty!");
+    toggleButtonState(true, "Submit");
     return;
   }
 
-  // Validate the URL format
-  const isValid = isValidUrl(inputUrl); // You can use `checkUrl` if you have a custom function
+  // Validate the format of the URL using a built-in or custom function
+  const isUrlValid = isValidUrl(urlValue); // You can use isValidUrl or validateUrl as per preference
 
-  if (!isValid) {
-    showError("Please insert a valid URL!");
-    setButtonState(true, "Submit");
+  if (!isUrlValid) {
+    showErrorMessages("Please enter a valid URL!");
+    toggleButtonState(true, "Submit");
     return;
   } else {
-    // If the URL is valid, hide any previous errors
-    hideError();
+    // If the URL is valid, proceed with sending it to the server
+    hideErrorMessages();
 
-    const requestBody = { url: inputUrl };
-
+    const requestBody = { url: urlValue };
     try {
-      // Send the URL to the server for sentiment analysis
+      // Sending the URL data to the server
       const response = await fetch("http://localhost:8000/getData", {
         method: "POST",
         headers: {
@@ -51,66 +49,58 @@ async function handleFormSubmit(event) {
         body: JSON.stringify(requestBody),
       });
 
-      // Check if the response is OK
       if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.status}`);
+        throw new Error(`Request failed: ${response.status}`);
       }
 
-      const { result, message, statusCode } = await response.json();
+      const { object, msg, code } = await response.json();
+      if (code === 200) {
+        hideErrorMessages();
 
-      // If the API returns successful status code (200), display the sentiment data
-      if (statusCode === 200) {
-        hideError();
-
-        let resultText = `Agreement: ${result.agreement}<br><br>`;
-        resultText += `Subjectivity: ${result.subjectivity}<br><br>`;
-        resultText += `Confidence: ${result.confidence}<br><br>`;
-        resultText += `Irony: ${result.irony}<br><br>`;
-        resultText += `Score Tag: ${result.score_tag}`;
+        let resultText = `Agreement: ${object.agreement}<br> <br>`;
+        resultText += `Subjectivity: ${object.subjectivity}<br> <br>`;
+        resultText += `Confidence: ${object.confidence}<br> <br>`;
+        resultText += `Irony: ${object.irony}<br> <br>`;
+        resultText += `Score Tag: ${object.score_tag}`;
 
         document.getElementById("results").innerHTML = resultText;
-      } else {
-        // If the status code is not 200, display the error message
-        showError(message);
+      } else if (code !== 200) {
+        showErrorMessages(msg);
       }
     } catch (error) {
       console.error("Error updating UI:", error);
     } finally {
-      // Re-enable the button after the process is complete
-      setButtonState(true, "Submit");
+      // Re-enable the submit button once the process finishes
+      toggleButtonState(true, "Submit");
     }
   }
 }
 
-// Function to show error messages
-function showError(errorText = "") {
-  if (errorText !== "") {
-    errorMessageElement.innerHTML = errorText;
+function showErrorMessages(message = "") {
+  if (message !== "") {
+    errorDisplay.innerHTML = message;
   }
-  errorMessageElement.classList.remove("hidden");
+  errorDisplay.classList.remove("hidden");
 }
 
-// Function to hide error messages
-function hideError() {
-  errorMessageElement.classList.add("hidden");
-  errorMessageElement.innerHTML = ""; // Clear previous error message
+function hideErrorMessages() {
+  errorDisplay.classList.add("hidden");
+  errorDisplay.innerHTML = ""; // Clear any previous error messages
 }
 
-// Function to control the submit button state (enabled/disabled)
-function setButtonState(enabled, buttonText) {
-  submitButtonElement.disabled = !enabled;
-  submitButtonElement.innerText = buttonText;
+function toggleButtonState(isEnabled, label) {
+  submitBtn.disabled = !isEnabled; // Enable or disable the button
+  submitBtn.innerText = label; // Change the button text
 }
 
-// Function to check if the provided string is a valid URL
 function isValidUrl(urlString) {
   try {
     new URL(urlString); // Attempt to create a URL object
     return true; // If successful, it's a valid URL
   } catch (_) {
-    return false; // If an error is thrown, it's not a valid URL
+    return false; // If it fails, it's not a valid URL
   }
 }
 
-// Export the handleFormSubmit function
-export { handleFormSubmit };
+// Export the handleFormSubmission function
+export { handleFormSubmission };

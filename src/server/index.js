@@ -3,51 +3,49 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { fetchSentimentAnalysis } = require("./meaningCloudApi");
+const { menaCloudAnalysis } = require("./meaningCloudApi");
 
+// Load environment variables from .env file
 dotenv.config();
 
-// Setup Express App
+// Initialize Express Application
 const app = express();
 
-// cors middleware
+// Middlewares
 app.use(cors());
-// body-parser middleware
 app.use(bodyParser.json());
-// make the dist folder the clint side
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "../../dist")));
 
 // Routes
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "../../dist", "index.html"));
 });
 
-// POST Route to handle URL processing
+// POST Route to handle the URL analysis request
 app.post("/getData", async (req, res) => {
   try {
     const { url } = req.body;
     if (!url) {
-      return res.status(400).json({ message: "url Required", statusCode: 400 });
+      return res.status(400).json({ msg: "URL is required", code: 400 });
     }
 
-    // Fetch sentiment analysis data from the MeaningCloud API
-    const sentimentResult = await fetchSentimentAnalysis(url, process.env.API_KEY);
-    const { result, message, statusCode } = sentimentResult;
+    // Fetch sentiment analysis data from menaCloud API
+    const analysisResult = await menaCloudAnalysis(url, process.env.API_KEY);
+    const { object, msg, code } = analysisResult;
 
-    // Handle API response errors
-    if (statusCode === 212 || statusCode === 100) {
-      return res.status(400).json({ result: null, message, statusCode });
+    // Process the API response
+    if (code === 212 || code === 100) {
+      return res.status(400).json({ object: null, msg, code });
     }
 
-    // Return successful sentiment analysis data
-    return res.status(200).json({ result, message, statusCode });
+    return res.status(200).json({ object, msg, code });
   } catch (error) {
     console.error("Error in /getData route:", error);
-    return res.status(500).json({ message: "Internal Server Error", statusCode: 500 });
+    return res.status(500).json({ msg: "Internal Server Error", code: 500 });
   }
 });
 
 // Start the server
 app.listen(8000, () => {
-  console.log("Server is running on port 8000");
+  console.log("Server is live on port 8000");
 });
