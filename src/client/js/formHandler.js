@@ -57,13 +57,25 @@ async function handleFormSubmission(event) {
       if (code === 200) {
         hideErrorMessages();
 
-        let resultText = `Agreement: ${object.agreement}<br> <br>`;
-        resultText += `Subjectivity: ${object.subjectivity}<br> <br>`;
-        resultText += `Confidence: ${object.confidence}<br> <br>`;
-        resultText += `Irony: ${object.irony}<br> <br>`;
-        resultText += `Score Tag: ${object.score_tag}`;
+        let resultConatainer = `
+        <div class="result-item">
+          <strong>Agreement:</strong> ${object.agreement}
+        </div>
+        <div class="result-item">
+          <strong>Subjectivity:</strong> ${object.subjectivity}
+        </div>
+        <div class="result-item">
+          <strong>Confidence:</strong> ${object.confidence}
+        </div>
+        <div class="result-item">
+          <strong>Irony:</strong> ${object.irony}
+        </div>
+        <div class="result-item">
+          <strong>Score Tag:</strong> ${object.score_tag}
+        </div>
+      `;
 
-        document.getElementById("results").innerHTML = resultText;
+        document.getElementById("results").innerHTML = resultConatainer;
       } else if (code !== 200) {
         showErrorMessages(msg);
       }
