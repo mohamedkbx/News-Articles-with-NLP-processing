@@ -13,6 +13,7 @@ form {
 
 .section__text {
   font-size: 1.5625rem;
+  margin: 1rem 0;
 }
 .text__container {
   margin-top: 1rem;
@@ -20,4 +21,21 @@ form {
 .results {
   font-size: 1.25rem;
   margin-top: 0.5rem;
+}
+
+.result-item {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.result-item strong {
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.result-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
