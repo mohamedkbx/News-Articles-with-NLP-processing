@@ -103,7 +103,7 @@ function toggleButtonState(isEnabled, label) {
   submitBtn.innerText = label; // Change the button text
 }
 
-function isValidUrl(urlString) {
+export function isValidUrl(urlString) {
   try {
     new URL(urlString); // Attempt to create a URL object
     return true; // If successful, it's a valid URL
