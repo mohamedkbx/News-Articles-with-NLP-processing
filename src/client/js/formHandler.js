@@ -2,7 +2,7 @@ import { checkForName } from "./nameChecker"; // If you wish to use a custom val
 
 // If working in Udacity workspace, adjust this to your Server API URL, for example: `https://example.udacity-student-workspaces.com/api`
 // const apiURL = 'https://example.udacity-student-workspaces.com/api'
-const apiURL = "https://localhost:6000/api";
+const apiEndPoint = "http://localhost:6000/getData";
 
 const formElement = document.getElementById("urlForm");
 const errorDisplay = document.getElementById("errorMsg");
@@ -41,7 +41,7 @@ async function handleFormSubmission(event) {
     const requestBody = { url: urlValue };
     try {
       // Sending the URL data to the server
-      const response = await fetch("http://localhost:8000/getData", {
+      const response = await fetch(apiEndPoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
