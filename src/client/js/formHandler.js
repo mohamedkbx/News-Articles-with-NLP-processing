@@ -2,12 +2,12 @@ import { checkForName } from "./nameChecker"; // If you wish to use a custom val
 
 // If working in Udacity workspace, adjust this to your Server API URL, for example: `https://example.udacity-student-workspaces.com/api`
 // const apiURL = 'https://example.udacity-student-workspaces.com/api'
-const apiURL = "https://localhost:8000/api";
+const apiURL = "https://localhost:6000/api";
 
 const formElement = document.getElementById("urlForm");
-const errorDisplay = document.getElementById("errorMessage");
+const errorDisplay = document.getElementById("errorMsg");
 const submitBtn = document.getElementById("submitButton");
-const urlInput = document.getElementById("url");
+const urlElemntInput = document.getElementById("urlElemntInput");
 
 formElement.addEventListener("submit", handleFormSubmission);
 
@@ -15,10 +15,10 @@ async function handleFormSubmission(event) {
   event.preventDefault();
 
   // Disable the button to prevent multiple submissions
-  toggleButtonState(false, "Processing...");
+  toggleButtonState(false, "Loading..");
 
   // Retrieve the URL from the input field
-  const urlValue = urlInput.value.trim(); // Remove extra spaces from the URL
+  const urlValue = urlElemntInput.value.trim(); // Remove extra spaces from the URL
 
   // Ensure the URL input is not empty
   if (urlValue === "") {

@@ -5,26 +5,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Cairo:wght@200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <title>Test</title>
+    <title>Sentemient Analysis</title>
   </head>
 
   <body>
     <header>
       <div>
-        <a class="link" href="/">
-          <span>Article Analyzer</span>
+        <a class="nav__link" href="#">
+          <span>MeaningCloud</span>
         </a>
       </div>
       <div>
-        <ul>
-          <li><a class="link" target="_blank" href="https://github.com/eslamemam1">Github</a></li>
+        <ul class="nav">
           <li>
-            <a class="link" target="_blank" href="https://www.linkedin.com/in/eslam-emam-12695815b/"
-              >linkedIn</a
-            >
+            <a class="nav__link" href="#">Home</a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">Test</a>
           </li>
         </ul>
       </div>
@@ -33,22 +33,24 @@
     <main>
       <section>
         <form id="urlForm">
-          <h5>Insert a valid URL to enable the Article Analyzer to start its process.</h5>
-          <input id="url" type="text" name="url" placeholder="Enter URL" />
-          <div id="errorMessage"></div>
+          <h5>Write a valid URL</h5>
+          <input id="urlInput" type="text" name="url" placeholder="Enter URL" />
+          <div id="errorMsg"></div>
           <button id="submitButton" type="submit" class="">Submit</button>
         </form>
       </section>
 
       <section class="results-section">
-        <div class="res-dev"><strong class="results-section-text">Form Results:</strong></div>
+        <div class="text__container">
+          <strong class="section__text">Form Results:</strong>
+        </div>
         <div id="results"></div>
       </section>
     </main>
 
     <footer>
-      <div class="text-footer">
-        <span>© 2024 Article Analyzer</span>
+      <div class="footer__text">
+        <span>© Sentemient Analysis</span>
       </div>
     </footer>
   </body>
